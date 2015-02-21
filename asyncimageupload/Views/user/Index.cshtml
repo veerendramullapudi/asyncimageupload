@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<html>
+<head>
+    <title>Registration</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <h2>User Registration</h2>
+
+    <form action="/user/Upload" method="post" enctype="multipart/form-data">
+        <table>
+            <tr>
+                <td>
+                    @Html.Label("userid")
+                </td>
+                <td>
+                    @Html.TextBox("userid")
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.Label("username")
+                </td>
+                <td>
+                    @Html.TextBox("username")
+                    @Html.ValidationMessage("username")
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.Label("password")
+                </td>
+                <td>
+                    @Html.Password("password")
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.Label("confirm password")
+                </td>
+                <td>
+                    @Html.Password("confirm_password")
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.Label("fullname")
+                </td>
+                <td>
+                    @Html.TextBox("fullname")
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.Label("emailid")
+                </td>
+                <td>
+                    @Html.TextBox("emailid")
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="file" id="file1" name="file1" /><br />
+                </td>
+                <td>
+                    <input type="submit" id="Uploadbtn" value="Upload" />
+                </td>
+            </tr>
+        </table>
+        <table class="table table-bordered table-striped table-hover">
+            @foreach (asyncimageupload.user u in ViewBag.UsersList)
+            {
+                <tr>
+                    <td>
+                        @Html.Label(u.userid.ToString())
+                    </td>
+                    <td>
+                        @Html.Label(u.username)
+                    </td>
+                    <td>
+                        @Html.Label(u.fullname)
+                    </td>
+                    <td>
+                        <b>@u.emailid</b>
+                      @*  @Html.Label(Html.Encode(u.emailid))*@
+                    </td>
+
+                    <td>
+                        <img id="photo" width="50" height="50" src="/user/GetImage/@u.userid" />
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </form>
+
+</body>
+
+</html>
